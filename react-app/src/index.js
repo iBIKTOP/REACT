@@ -18,5 +18,6 @@ var data = [
     }
 ]
 
+// ReactDOM.render(React.createElement(Hero), document.getElementById('root')); // или
 ReactDOM.render(<App heroes={data} />, document.getElementById('root'));
 
