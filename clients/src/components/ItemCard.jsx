@@ -3,24 +3,26 @@ import React from 'react';
 
 class ItemCard extends React.Component {
     render() {
-        // let client;
-        if(this.props.client) {
-            console.log(this.props.client.general.firstName);
-            // for (let i = 0; i < clients.length; i++) {
-            //     if (clients[i].general.firstName === this.props.client.general.firstName) {
-            //         client = clients[i];
-            //         break;
-            //     }
-            // }
-        }
+        let client = this.props.client;
+        if (client) {
             return (
-                <div className="card">
-                    <img className="card-img-top" src={this.props.client.general.avatar} alt="Card cap" />
+                <div className="card text-center">
+                    <div className="card-header">
+                        <img className="card-img" src={client.general.avatar} alt="Card cap" />
+                    </div>
                     <div className="card-body">
-                        <p className="card-text">{this.props.client.general.firstName} {this.state.client.general.lastName}</p>
+                        <h3 className="card-title">{client.general.firstName} {client.general.lastName}</h3>
+                        <p className="card-text">{client.job.company}</p>
+                        <small className="card-text">{client.job.title}</small>
+                    </div>
+                    <div className="card-footer text-muted">
+                        Email: {client.contact.email}<br />
+                        Phone: {client.contact.phone}
                     </div>
                 </div>
             )
+        } else { return <p>Выберете клиента...</p> }
+
     }
 }
 export default ItemCard;
