@@ -1,31 +1,32 @@
 import React from 'react';
-import ListItem from './ListItem';
-import clients from '../clients'
+
 import ItemCard from './ItemCard';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AllItems from './AllItems';
 
 class App extends React.Component {
+    constructor(props){
+      super(props)
+      this.state = {
+        visibleItem: ''
+      }
+      this.dataUpdated = this.dataUpdated.bind(this)
+    }
+
+    dataUpdated(client) {
+      this.setState({ visibleItem: client })
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-4">
                         <div className="list-group">
-                            {
-                                clients.map(function (client, i) {
-                                    return (
-                                        <ListItem key={i} client={client} />
-                                    )
-                                })
-                            }
+                            <AllItems propsChanged={this.dataUpdated} />
                         </div>
                     </div>
                     <div className="col-8">
-                        <Router>
-                            <Switch>
-                                <Route path="/:firstName" component={ItemCard} />
-                            </Switch>
-                        </Router>
+                      <ItemCard client={ this.state.visibleItem } />
                     </div>
                 </div>
             </div>

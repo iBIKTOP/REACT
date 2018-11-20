@@ -1,14 +1,23 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
 
 class ListItem extends React.Component {
+    constructor(props){
+      super(props)
+      this.itemClicked = this.itemClicked.bind(this)
+    }
+
+    itemClicked(e) {
+      e.preventDefault()
+      this.props.itemChanged(this.props.client)
+    }
+
     render() {
-        // console.log(this.props.client);
+        const { firstName, avatar } = this.props.client.general
         return (
-            <NavLink to={`/${this.props.client.general.firstName}`} type="button" className="list-group-item list-group-item-action">
-                <img className="avatar" src={this.props.client.general.avatar} alt='img'></img>
-                {this.props.client.general.firstName}
-            </NavLink>
+            <div className="list-group-item list-group-item-action" onClick={this.itemClicked}>
+                <img className="avatar" src={avatar} alt='img'></img>
+                { firstName }
+            </div>
         );
     };
 }

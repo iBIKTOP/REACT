@@ -2,16 +2,10 @@ import React from 'react';
 import clients from '../clients';
 
 class ItemCard extends React.Component {
-
     render() {
-        let firstName = this.props.match.params.firstName;
-        let client;
-        for (let i = 0; i < clients.length; i++) {
-            if (clients[i].general.firstName === firstName) {
-                client = clients[i];
-                console.log(client.general.firstName);
-                break;
-            }
+        const client = this.props.client
+        if (!client) {
+          return false
         }
         return (
             <div className="card">
