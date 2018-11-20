@@ -1,10 +1,18 @@
 import React from 'react';
 import ListItem from './ListItem';
-import clients from '../clients'
 import ItemCard from './ItemCard';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import clients from '../clients';
 
 class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {client: ''}
+        this.setClient = this.setClient.bind(this);
+    }
+
+    setClient(client){
+        this.setState({client: client})
+    }
     render() {
         return (
             <div className="container">
@@ -14,18 +22,14 @@ class App extends React.Component {
                             {
                                 clients.map(function (client, i) {
                                     return (
-                                        <ListItem key={i} client={client} />
+                                        <ListItem key={i} client={client} onChange={this.setClient}/>
                                     )
-                                })
+                                }.bind(this))
                             }
                         </div>
                     </div>
                     <div className="col-8">
-                        <Router>
-                            <Switch>
-                                <Route path="/:firstName" component={ItemCard} />
-                            </Switch>
-                        </Router>
+                        <ItemCard client={this.state.client}/>
                     </div>
                 </div>
             </div>
